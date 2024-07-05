@@ -1,0 +1,198 @@
+body {
+  background-color: #1f1d1b;
+  /* min-height: 100vh; */
+  margin: 0;
+  padding: 0;
+  color: aliceblue;
+}
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: .5rem;
+  gap: 2rem;
+}
+
+section {
+  padding: 2rem;
+}
+
+.section-form {
+  background-color: #008080;
+  border-radius: 0.5rem;
+  position: relative;
+  display: none;
+  width: 80%;
+  margin: auto;
+}
+
+.cerrar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #1f1d1b;
+  font-weight: 900;
+}
+
+.cerrar:active {
+  background-color: rgb(255, 51, 51);
+  scale: 0.9;
+  color: aliceblue;
+}
+
+.section-form form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-form form h2 {
+  color: rgb(235, 235, 235);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-form form input {
+  border-radius: 0.5rem;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.section-form label {
+  color: #1f1d1b;
+}
+
+.section-form button {
+  padding: 0.7rem;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  transition: background-color 300ms;
+}
+.section-form button:hover {
+  background-color: #1f1d1b;
+  color: aliceblue;
+}
+
+.section-form button:active {
+  border: 2px solid wheat;
+}
+
+.section-books {
+  background-color: #4c5757;
+  border-radius: 0.5rem;
+  padding:1rem;
+}
+
+.cont-title-add h2 {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.cont-title-add {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-books .add {
+  border: none;
+  box-shadow: 1px 3px 0px rgb(0, 0, 0);
+  border-radius: 0.5rem;
+  background-color: rgb(255, 255, 255);
+  padding: .5rem 2rem;
+}
+
+.section-books .add:active {
+  scale: 0.95;
+  color: #fff4b7;
+  box-shadow: 1px 1px 0px rgb(0, 0, 0);
+
+}
+
+.cont-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+}
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  background-color: rgb(255, 255, 255);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 1px 5px 15px rgba(0, 0, 0, 0.459);
+}
+
+.title,
+.author,
+.pages,.read-status{
+  font-size: 1rem;
+  color: black;
+}
+
+
+
+.title {
+  font-size: 1.4rem;
+  font-style: italic;
+  text-wrap: balance;
+  margin-bottom: 0.5rem;
+}
+
+.botones {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+.botones button {
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  border-radius: .25rem;
+  background-color: #ece3e3;
+  color: #000000;
+  border-bottom: 2px solid rgb(255, 51, 51);
+}
+
+.botones :last-child {
+  border-color: rgb(255, 51, 51);
+}
+
+.botones button:active {
+  scale: 0.95;
+  border-radius: none;
+  background-color: #bebbbb ;
+}
+
+.red{
+  border-bottom: 2px solid red !important;
+  color: red !important;
+}
+
+.green{
+  border-bottom: 2px solid green !important;
+  color: green !important;
+}
