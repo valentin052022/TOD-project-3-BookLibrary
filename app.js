@@ -1,88 +1,94 @@
-// elementos del libro
-
-// show form for add the books
-const add = document.querySelector(".add");
-const hide = document.querySelector(".cerrar");
-const form = document.getElementById("form");
-
 let my_library_books = [];
 
-function Books(title, author, pages) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = false;
+class Books {
+  constructor(title, author, pages) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = false;
+  }
+
+  // Método para alternar el estado de lectura
+  toggleRead = () => {
+    this.isRead = !this.isRead;
+  };
+  // Método que retorna un string dependiendo si el libro esta leido o no
+  readStatus = () => {
+    return this.isRead
+      ? "The Book has already been read"
+      : "The Book has not been read";
+  };
 }
 
-// Método para alternar el estado de lectura
-Books.prototype.toggleRead = function () {
-  this.isRead = !this.isRead;
-};
+class library {
+  constructor() {
+    this.books = [];
+    this.init();
+  }
 
-Books.prototype.readStatus = function () {
-  return this.isRead
-    ? "The Book has already been read" 
-    : "The Book has not been read";
-};
+  init() {
+    document.querySelector(".add").addEventListener("click", this.showForm);
+    document.querySelector(".cerrar").addEventListener("click", this.hideForm);
+    document.getElementById("form").addEventListener("submit", this.addBook);
+    this.renderBooks();
+  }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
-  const pages = document.getElementById("pages").value;
+  showForm = () => {
+    document.querySelector(".section-form").style.display = "inherit";
+  };
 
-  my_library_books.push(new Books(title, author, pages, false));
+  hideForm = () => {
+    document.querySelector(".section-form").style.diplay = "none";
+  };
 
-  // show Books
-  showBooks(my_library_books);
-});
+  addBook = (e) => {
+    e.preventDefault();
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("title").value;
+    const pages = document.getElementById("title").value;
 
-const showBooks = () => {
-  const cont_books = document.querySelector(".cont-cards");
-  cont_books.innerHTML = "";
-  my_library_books.forEach((Books, index) => {
-    const libro = `<article class="card" id=${index}>
-                <h3 class="title">${Books.title}</h3>
-                <p class="author"><b>Author: </b> ${Books.author}</p>
-                <p class="pages"><b>Pages: </b>${Books.pages}</p>
-                <p class="read-status"><b>Read: </b>${Books.readStatus()}</p>
-                <div class="botones">
-                <button class="${Books.isRead ? "read green" : "read red"}">Read</button>
-                  <button class="delete">Delete</button>
-                </div>
-              </article>`;
-    cont_books.innerHTML += libro;
-  });
+    this.books.push(new Books(title, author, pages));
+    this.renderBooks();
+    this.hideForm();
+  };
 
-  // Añadir event listeners a los botones de eliminar
-  const deleteButtons = document.querySelectorAll(".delete");
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const id = button.parentNode.parentNode.getAttribute("id");
-      deleteBook(id);
+  renderBooks = () => {
+    const cont_books = document.querySelector(".cont-cards");
+    cont_books.innerHTML = "";
+    this.books.forEach((book, index) => {
+      const libro = `<article class="card" id=${index}>
+                  <h3 class="title">${book.title}</h3>
+                  <p class="author"><b>Author: </b> ${book.author}</p>
+                  <p class="pages"><b>Pages: </b>${book.pages}</p>
+                  <p class="read-status"><b>Read: </b>${book.readStatus()}</p>
+                  <div class="botones">
+                  <button class="${
+                    book.isRead ? "read green" : "read red"
+                  }">Read</button>
+                    <button class="delete">Delete</button>
+                  </div>
+                </article>`;
+      cont_books.innerHTML += libro;
     });
-  });
 
-  // Añadir eventos para los botones de cambiar estado de lectura
-  const toggleReadButtons = document.querySelectorAll(".read");
-  toggleReadButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      my_library_books[index].toggleRead();
-      showBooks();
+    document.querySelectorAll(".delete").forEach((button) => {
+      button.addEventListener("click", this.deleteBook);
     });
-  });
-};
 
-const deleteBook = (id) => {
-  my_library_books.splice(id, 1);
-  showBooks();
-};
+    document.querySelectorAll(".read").forEach((button, index) => {
+      button.addEventListener("click", () => {
+        this.books[index].toggleRead();
+        this.renderBooks();
+      });
+    });
+  };
 
-add.addEventListener("click", () => {
-  const section_form = (document.querySelector(".section-form").style.display =
-    "inherit");
-});
+  deleteBook = (e) => {
+    const id = e.target.parentNode.parentNode.getAttribute("id");
+    this.books.splice(id, 1);
+    this.renderBooks();
+  }
+}
 
-hide.addEventListener("click", () => {
-  const x = (document.querySelector(".section-form").style.display = "none");
-});
+const myLibrary = new library();
+myLibrary.init();
